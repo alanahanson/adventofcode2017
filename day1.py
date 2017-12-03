@@ -1,16 +1,14 @@
-with open('solution1.txt') as f:
-    read_data = f.read().strip()
+with open('solutions/solution1.txt') as f:
+    digits = f.read().strip()
 
-l = []
-
-for i, c in enumerate(read_data):
-    try:
-        if c == read_data[i+1]:
+def sum_repeat_digits(offset):
+    l = []
+    for i, c in enumerate(digits):
+        index_to_check = int((i + offset) % len(digits))
+        if c == digits[index_to_check]:
             l.append(int(c))
-    except IndexError:
-        if read_data[-1] == read_data[0]:
-            l.append(int(read_data[0]))
-
-print(sum(l))
+    return sum(l)
 
 
+print('Part 1', sum_repeat_digits(1))
+print('Part 2', sum_repeat_digits(len(digits)/2))
